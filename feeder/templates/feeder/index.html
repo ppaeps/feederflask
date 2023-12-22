@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Snack time{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+    <div class="px-4 py-3 text-center">
+      <div style="font-size:5rem;width:100%;text-align:center;">😺</div>
+      <h1 class="display-5 fw-bold text-body-emphasis">Snack time</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Use the buttons to feed our kitty a tasty snack!</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" id="buttons">
+          <button type="button" class="btn btn-primary btn-lg px-4" id="btnSmallSnack">Small snack</button>
+          <button type="button" class="btn btn-primary btn-lg px-4" id="btnBigSnack">Big snack</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column flex-md-row p-3 gap-4 align-items-center justify-content-center">
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+          <div class="rounded-circle flex-shrink-0" style="font-size:2rem;text-align:center;">⏰</div>
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <div>
+              <h6 class="mb-0">Next scheduled feeding time</h6>
+              <p class="mb-0 opacity-75">Modify the kitty's feeding schedule.</p>
+            </div>
+            <small class="opacity-50 text-nowrap" id="nextFeeding">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </small>
+          </div>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+          <div class="rounded-circle flex-shrink-0" style="font-size:2rem;text-align:center;">💦</div>
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <div>
+              <h6 class="mb-0">Replace desiccant</h6>
+              <p class="mb-0 opacity-75">Reset desiccant replacement timer.</p>
+            </div>
+            <small class="opacity-50 text-nowrap" id="replaceDesiccant">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </small>
+          </div>
+        </a>
+      </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <script src="{{ url_for('static', filename='petkit.js') }}"></script>
+{% endblock %}

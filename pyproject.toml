@@ -1,0 +1,13 @@
+[project]
+name = "feeder"
+version = "1.0.0"
+description = "Monitor and control our kitty's feeder"
+dependencies = [
+    "flask[async]",
+    "petkitaio",
+    "waitress",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
