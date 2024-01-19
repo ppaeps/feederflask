@@ -50,6 +50,31 @@ function feedKitty(size) {
     });
 }
 
+function resetDesiccant() {
+    $('#btnResetDesiccant').off('click');
+    $('#replaceDesiccant').text('');
+    $('#replaceDesiccant').append(
+        '<div class="spinner-border spinner-border-sm" role="status">' +
+        '  <span class="visually-hidden">Loading...</span>' +
+        '</div>')
+    $.ajax({
+      url: "reset-desiccant",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({ feeder: feeder.id })})
+    .fail(function(jqXHR, textStatus) {
+        console.log("Status: " + textStatus);
+        $('#replaceDesiccant').text('⚠️')
+        $('#replaceDesiccant').removeClass('opacity-50');
+    })
+    .done(function(data) {
+        console.log("Reset desiccant timer");
+        $('#replaceDesiccant').text('✅');
+        $('#replaceDesiccant').removeClass('opacity-50');
+	r = data
+    });
+}
+
 loadPetKitData();
 
 $('#btnSmallSnack').on('click', (function() {
@@ -57,4 +82,7 @@ $('#btnSmallSnack').on('click', (function() {
 }));
 $('#btnBigSnack').on('click', (function() {
   feedKitty("big");
+}));
+$('#btnResetDesiccant').on('click', (function() {
+  resetDesiccant();
 }));

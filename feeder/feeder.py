@@ -62,3 +62,17 @@ async def feed_kitty():
             return jsonify(status="ok")
         except Exception as e:
             return jsonify(error=str(e)), 500
+
+@bp.route('/reset-desiccant', methods=['POST'])
+async def reset_desiccant():
+    # XXX error handling
+    j = request.get_json()
+    f = int(j['feeder'])
+    async with ClientSession() as s:
+        try:
+            client = get_petkit_client(s)
+            devices = await client.get_petkit_data()
+            await client.reset_feeder_desiccant(feeder=devices.feeders[f])
+            return jsonify(status="ok")
+        except Exception as e:
+            return jsonify(error=str(e)), 500
