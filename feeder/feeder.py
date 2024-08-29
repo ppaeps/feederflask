@@ -28,7 +28,11 @@ async def metrics():
             # We only have one feeder - it will always be last
             for k in devices.feeders:
                 feeder=devices.feeders[k]
-            return render_template('feeder/metrics.j2', feeder=feeder)
+            # We also only have one water fountain...
+            for k in devices.water_fountains:
+                fountain=devices.water_fountains[k]
+            return render_template('feeder/metrics.j2', feeder=feeder,
+                                   fountain=fountain)
         except Exception as e:
             return jsonify(error=str(e)), 500
 

@@ -1,4 +1,18 @@
 # HELP petkit_feeder_desiccant_left_days Days before desiccant needs replacing
 # TYPE petkit_feeder_desiccant_left_days gauge
 petkit_feeder_desiccant_left_days {{ feeder.data.state.desiccantLeftDays }}
-
+# HELP petkit_fountain_filter_left_days Days before water filter needs replacing
+# TYPE petkit_fountain_filter_left_days gauge
+petkit_fountain_filter_left_days {{ (fountain.data.filterPercent/100*30)|round(method='floor')|int }}
+# HELP petkit_fountain_water_alert Fountain is out of water
+# TYPE petkit_fountain_water_alert gauge
+petkit_fountain_water_alert {{ fountain.data.lackWarning }}
+# HELP petkit_fountain_power_status Fountain is running
+# TYPE petkit_fountain_power_status gauge
+petkit_fountain_power_status {{ fountain.data.powerStatus }}
+# HELP petkit_fountain_today_pump_run_time Fountain pump running time today
+# TYPE petkit_fountain_today_pump_run_time gauge
+petkit_fountain_today_pump_run_time {{ fountain.data.todayPumpRunTime }}
+# HELP petkit_fountain_water_pump_run_time Fountain pump running time
+# TYPE petkit_fountain_water_pump_run_time gauge
+petkit_fountain_water_pump_run_time {{ fountain.data.waterPumpRunTime }}

@@ -1,4 +1,5 @@
 var feeder;
+var fountain;
 var r;
 
 function loadPetKitData() {
@@ -11,15 +12,31 @@ function loadPetKitData() {
         $('#nextFeeding').removeClass('opacity-50');
         $('#replaceDesiccant').text('⚠️')
         $('#replaceDesiccant').removeClass('opacity-50');
+        $('#fountainRunning').text('⚠️')
+        $('#fountainRunning').removeClass('opacity-50');
+        $('#replaceFilter').text('⚠️')
+        $('#replaceFilter').removeClass('opacity-50');
     })
     .done(function(json) {
         // We only have one feeder - it will always be last!
         for (var k in json.feeders) {
             feeder = json.feeders[k];
         }
+
+        // We also only have one water fountain...
+        for (var k in json.water_fountains) {
+            fountain = json.water_fountains[k];
+        }
+
         $('#feederInfo').text(' { "sn": "' + feeder.data.sn + '", "firmware": "' + feeder.data.firmware + '" }')
         $('#nextFeeding').text(feeder.data.desc.slice(-5));
         $('#replaceDesiccant').text(feeder.data.state.desiccantLeftDays + " days")
+        if (fountain.data.runStatus) {
+                $('#fountainRunning').text("running")
+        } else {
+                $('#fountainRunning').text("paused")
+        }
+        $('#replaceFilter').text(Math.floor(fountain.data.filterPercent/100 * 30) + " days")
     })
     .always(function() {
         $('.spinner-border').remove();
@@ -43,7 +60,7 @@ function feedKitty(size) {
         // Re-enable the buttons after ten seconds
         $('#btnSmallSnack').prop('disabled', false).delay(10000);
         $('#btnBigSnack').prop('disabled', false).delay(10000);
-	r = data
+        r = data
     })
     .always(function() {
         console.log("Finished feeding kitty a " + size + " snack");
@@ -71,7 +88,7 @@ function resetDesiccant() {
         console.log("Reset desiccant timer");
         $('#replaceDesiccant').text('✅');
         $('#replaceDesiccant').removeClass('opacity-50');
-	r = data
+        r = data
     });
 }
 

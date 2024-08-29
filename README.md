@@ -2,18 +2,19 @@
 
 Monitor and control kitty's automatic feeder.
 
-This is a Flask application around [PetKitAIO](https://github.com/RobertD502/petkitaio).  It enables basic day-to-day operation of a feeder.
+This is a Flask application around [PetKitAIO](https://github.com/RobertD502/petkitaio).  It enables basic day-to-day operation of a single feeder and a single water fountain.
 
 ## Features and limitations
 
-- Webpage to dispense snacks
+- Webpage to dispense snacks and monitor status
 - Prometheus `/metrics` endpoint for monitoring and alerting
 - Only supports a single feeder
+- Only supports a single water fountain
 - No security!
 
 The PetKit API is undocumented and proprietary.  This will only work as long as PetKitAIO works.
 
-This project was developed and tested with a single [PetKit Fresh Element Solo (D4)](https://petkit.com/products/fresh-element-solo).
+This project was developed and tested with a single [PetKit Fresh Element Solo (D4)](https://petkit.com/products/fresh-element-solo), and a single [PetKit Eversweet 3 Pro (UVC)](https://petkit.com/products/eversweet-3-pro-wireless-pump-uvc).
 
 There is intentionally no security.  Run this inside the firewall.
 
